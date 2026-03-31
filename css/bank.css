@@ -1,0 +1,215 @@
+:root {
+    --primary: #2c2c44;
+    --bg: #131321;
+    --accent: #6c5ce7;
+    --success: #00d094;
+    --general-color: #007bff;
+    --text: #ffffff;
+    --text-dim: #8b8b9e;
+    --glass: rgba(255, 255, 255, 0.05);
+    --border: rgba(255, 255, 255, 0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Responsive Layout Container */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+@media (min-width: 1024px) {
+    .app-container { flex-direction: row; }
+}
+
+/* Sidebar / Navigation */
+.sidebar {
+    background: var(--primary);
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (min-width: 1024px) {
+    .sidebar {
+        width: 260px;
+        flex-direction: column;
+        justify-content: flex-start;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+        border-bottom: none;
+        border-right: 1px solid var(--border);
+    }
+}
+
+.logo { font-size: 14px; color: var(--success); }
+.logo img{
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) { .main-content { padding: 40px; } }
+
+/* Balance Card - The Hero Section */
+.balance-card {
+    background: linear-gradient(135deg, #2c2c44 0%, #1a1a2e 100%);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 25px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .balance-card {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+        padding: 40px;
+    }
+}
+
+.balance-label { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 5px; }
+.balance-value { font-size: 2rem; font-weight: 700; color: #fff; }
+
+/* Modern Button */
+.btn-primary {
+    background: var(--general-color);
+    color: #131321;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%; /* Full width on mobile */
+}
+
+@media (min-width: 768px) { .btn-primary { width: auto; } }
+
+.btn-primary:active { transform: scale(0.95); }
+
+/* Responsive Transaction Table */
+.history-section {
+    background: var(--glass);
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    padding: 20px;
+}
+
+.history-header { margin-bottom: 20px; font-size: 1.1rem; }
+
+/* Mobile Table Fix: Hide Table, Show Cards */
+.desktop-table { display: none; width: 100%; border-collapse: collapse; }
+.mobile-list { display: flex; flex-direction: column; gap: 15px; }
+
+@media (min-width: 768px) {
+    .desktop-table { display: table; }
+    .mobile-list { display: none; }
+}
+
+th { text-align: left; color: var(--text-dim); padding-bottom: 15px; border-bottom: 1px solid var(--border); }
+td { padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+/* Mobile Transaction Card */
+.trx-card {
+    background: rgba(255,255,255,0.03);
+    padding: 15px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.status-pill {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.success { background: rgba(0, 208, 148, 0.1); color: var(--success); }
+.failed { background: rgba(230, 5, 5, 0.249); color: var(--error); }
+.pending { background: rgba(255, 165, 0, 0.1); color: var(--warning); }
+
+/* Modal / Popup */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(10px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: var(--primary);
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+input {
+    width: 100%;
+    background: #131321;
+    border: 1px solid var(--border);
+    padding: 15px;
+    border-radius: 12px;
+    color: white;
+    margin-bottom: 15px;
+    outline: none;
+}
+
+input:focus { border-color: var(--success); }
+
+
+
+#popup-modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+#popup-modal.active {
+  display: flex;
+}
